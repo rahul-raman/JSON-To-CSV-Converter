@@ -90,17 +90,21 @@ public class JsonToCsvWriter {
 		   public void writeLargeFile(List<LinkedHashMap<String, String>> flatJson, String separator, String fileName, Set<String> headers){
 		    	String csvString;
 		        csvString = StringUtils.join(headers.toArray(), separator) + "\n";
-		        File file = new File(fileName);
+		        File file = new File("files/"+fileName);
+		        //File file = new File(fileName);
 		        
 		        try {
 		            // ISO8859_1 char code to Latin alphabet
 		            FileUtils.write(file, csvString, "ISO8859_1");
+		        	
 		            
 		            for (Map<String, String> map : flatJson) {
 		            	csvString = "";
 		            	csvString = getSeperatedColumns(headers, map, separator) + "\n";
-		            	Files.write(Paths.get(fileName), csvString.getBytes("ISO8859_1"), StandardOpenOption.APPEND);
-		            }            
+		            	//Files.write(Paths.get(fileName), csvString.getBytes("ISO8859_1"), StandardOpenOption.APPEND);
+		            	Files.write(Paths.get("files/"+fileName), csvString.getBytes("ISO8859_1"), StandardOpenOption.APPEND);
+		            }   
+		                     
 		        } catch (IOException e) {
 		            //LOGGER.error("CSVWriter#writeLargeFile(flatJson, separator, fileName, headers) IOException: ", e);
 		        }
