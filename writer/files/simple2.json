@@ -1,0 +1,26 @@
+{
+        "studentName": "Foo",
+        "Age": "12",
+        "subjects": [
+            {
+                "name": "English",
+                "marks": "40"
+            },
+            {
+                "name": "History",
+                "marks": "50"
+            }
+        ],
+		"personInformation": {
+        "accessAssignment": {
+            "accessProfileName": "Super Access",
+            "delegateProfileName": "Manufacturing Managers Delegate Profile",
+            "effectiveDatedTimeEntryMethods": [
+                {
+                    "effectiveDate": "1900-01-01",
+                    "timeEntryTypeName": "Project View"
+                }
+            ]
+        }
+		}
+}

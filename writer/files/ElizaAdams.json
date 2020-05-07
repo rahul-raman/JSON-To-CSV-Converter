@@ -1,0 +1,218 @@
+{
+    "personIdentity": {
+        "personKey": 243
+    },
+    "personInformation": {
+        "accessAssignment": {
+            "accessProfileName": "Manufacturing Employee",
+            "approvalMethodName": "Single Approver",
+            "approveOvertimeflag": false,
+            "availabilityPatternName": "Empty Profile",
+            "delegateProfileName": "Empty Profile",
+            "effectiveDatedTimeEntryMethods": [
+                {
+                    "effectiveDate": "1900-01-01",
+                    "timeEntryTypeName": "Time Stamp & Hourly View"
+                }
+            ],
+            "groupScheduleName": "Empty Profile",
+            "hyperFindScheduleVisibilityName": "Empty Profile",
+            "managerPayCodeName": "Empty Profile",
+            "managerViewPayCodeName": "Empty Profile",
+            "managerWorkRuleName": "Empty Profile",
+            "notificationProfileName": "All",
+            "preferenceProfileName": "Manu Employee DP",
+            "professionalPayCodeName": "Manufacturing Pay Codes",
+            "professionalWorkRuleName": "Manufacturing Work Rules",
+            "reportName": "EMPTY",
+            "schedulePatternName": "Empty Profile",
+            "shiftCodeName": "Empty Profile",
+            "timeEntryTypeName": "Time Stamp & Hourly View",
+            "transferEmployeeFlag": false
+        },
+        "badgeAssignments": [
+            {
+                "badgeNumber": "89883",
+                "effectiveDate": "2014-05-29T00:00",
+                "expirationDate": "3000-01-01T00:00"
+            }
+        ],
+        "customDataList": [
+            {
+                "customDataTypeName": "Only Custom Data Field"
+            },
+            {
+                "customDataTypeName": "Seniority"
+            }
+        ],
+        "emailAddresses": [
+            {
+                "address": "cxdb.employee@sink.sendgrid.net",
+                "contactTypeName": "Work",
+                "hasEmailNotificationDelivery": true
+            }
+        ],
+        "employmentStatusList": [
+            {
+                "effectiveDate": "2017-04-18",
+                "employmentStatusName": "Active",
+                "expirationDate": "3000-01-01"
+            }
+        ],
+        "expectedHoursList": [
+            {
+                "quantity": "8.0",
+                "timePeriodTypeName": "Daily"
+            },
+            {
+                "quantity": "40.0",
+                "timePeriodTypeName": "Weekly"
+            },
+            {
+                "quantity": "80.0",
+                "timePeriodTypeName": "Pay Period"
+            }
+        ],
+        "kpassAccount": {
+            "isRestrictedUser": false,
+            "learningPath": ""
+        },
+        "person": {
+            "accrualProfileName": "Vac Pers Sick",
+            "fingerRequiredFlag": false,
+            "firstName": "Eliza",
+            "fullName": "Adams, Eliza",
+            "fullTimeEquivalencies": [
+                {
+                    "effectiveDate": "1900-01-01",
+                    "fullTimePercentage": 100
+                }
+            ],
+            "fullTimePercentage": 100,
+            "hasKmailNotificationDelivery": true,
+            "hireDate": "2017-04-18",
+            "lastName": "Adams",
+            "managerSignoffThruDateTime": "1901-01-01",
+            "payrollLockoutThruDateTime": "1901-01-01",
+            "personNumber": "20335",
+            "shortName": "EAdams"
+        },
+        "personAccessAssignments": [
+            {
+                "effectiveDate": "2017-04-18",
+                "empMgrTransferOrganizationSetName": "Empty",
+                "expirationDate": "3000-01-01",
+                "managerAccessOrganizationSetName": "Empty",
+                "managerEmployeeGroupEffectiveDate": "1753-01-01",
+                "managerEmployeeGroupExpirationDate": "3000-01-01",
+                "managerEmployeeGroupName": "Empty",
+                "managerTransferOrganizationSetEffectiveDate": "1753-01-01",
+                "managerTransferOrganizationSetExpirationDate": "3000-01-01",
+                "managerTransferOrganizationSetName": "Empty",
+                "professionalTransferOrganizationSetEffectiveDate": "2017-04-18",
+                "professionalTransferOrganizationSetExpirationDate": "3000-01-01",
+                "professionalTransferOrganizationSetName": "USMfg Metropltn Plant-MchnShp"
+            }
+        ],
+        "personAuthenticationTypes": [
+            {
+                "activeFlag": true,
+                "authenticationTypeName": "Basic"
+            }
+        ],
+        "personLicenseTypes": [
+            {
+                "activeFlag": true,
+                "licenseTypeName": "Employee"
+            },
+            {
+                "activeFlag": true,
+                "licenseTypeName": "Absence"
+            },
+            {
+                "activeFlag": true,
+                "licenseTypeName": "Workforce MobileEmployee"
+            },
+            {
+                "activeFlag": true,
+                "licenseTypeName": "Workforce TabletEmployee"
+            },
+            {
+                "activeFlag": true,
+                "licenseTypeName": "Scheduling"
+            },
+            {
+                "activeFlag": true,
+                "licenseTypeName": "Hourly Timekeeping"
+            }
+        ],
+        "postalAddresses": [
+            {
+                "contactTypeName": "Home",
+                "country": "United States",
+                "state": "California"
+            }
+        ],
+        "telephoneNumbers": [
+            {
+                "contactTypeName": "Phone 1",
+                "isSMSSwitch": true,
+                "phoneNumber": "(302)772-2897"
+            },
+            {
+                "contactTypeName": "Phone 2",
+                "isSMSSwitch": true,
+                "phoneNumber": "(302)772-1031"
+            },
+            {
+                "contactTypeName": "Phone 3",
+                "isSMSSwitch": true,
+                "phoneNumber": "(302)772-2044"
+            }
+        ],
+        "userAccountStatusList": [
+            {
+                "effectiveDate": "2017-04-18",
+                "expirationDate": "3000-01-01",
+                "userAccountStatusName": "Active"
+            }
+        ]
+    },
+    "jobAssignment": {
+        "baseWageRates": [
+            {
+                "effectiveDate": "1900-01-01",
+                "expirationDate": "3000-01-01",
+                "hourlyRate": 46
+            }
+        ],
+        "hasPersonalOvertimeFlag": false,
+        "jobAssignmentDetails": {
+            "payRuleName": "Manufacturing Intern",
+            "supervisorName": "Martin, Michael",
+            "supervisorPersonNumber": "10015",
+            "timeZoneName": "(GMT -05:00) Eastern Time",
+            "workerTypeName": "Hourly"
+        },
+        "primaryLaborAccounts": [
+            {
+                "effectiveDate": "2017-04-18",
+                "expirationDate": "3000-01-01",
+                "laborCategoryName": ",,First Shift,,,",
+                "organizationPath": "Organization/United States/Metropolitan Plant/Machine Shop/Apprentice Welder"
+            }
+        ],
+        "useMultipleAssignmentsFlag": false
+    },
+    "user": {
+        "userAccount": {
+            "clockOnlyUser": false,
+            "consecutiveBadLogons": 0,
+            "logonProfileName": "Professional Salaried Employee",
+            "mfaRequired": false,
+            "passwordUpdateFlag": false,
+            "passwordUpdatedDateTime": "2018-04-23T10:05:57.507",
+            "userName": "ElizaAdams"
+        }
+    }
+}
