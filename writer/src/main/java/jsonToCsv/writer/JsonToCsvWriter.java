@@ -12,6 +12,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * This class flattens JSON and then writes that JSON to different CSVs as per
+ * CXDB requirement
+ * 
+ * @author rahul.raman
+ * 
+ */
 public class JsonToCsvWriter {
 
 	HashMap<String, Csvs> csvLists = new HashMap<String, Csvs>();
@@ -37,6 +44,14 @@ public class JsonToCsvWriter {
 
 		}
 		
+		/**
+		 * Get the CSV header.
+		 * 
+		 * @author rahul.raman
+		 * @param flatJson Flattened JSON Obtained
+		 *
+		 * @return a Set of headers
+		 */
 		public Set<String> collectOrderedHeaders(List<LinkedHashMap<String, String>> flatJson) {
 	        Set<String> headers = new LinkedHashSet<String>();
 	        for (Map<String, String> map : flatJson) {
@@ -45,6 +60,15 @@ public class JsonToCsvWriter {
 	        return headers;
 	    }    
 		
+		/**
+		 * @author rahul.raman Get separated columns used a separator (comma, semi
+		 *         column, tab).
+		 *
+		 * @param headers The CSV headers
+		 * @param map     Map of key-value pairs contains the header and the value
+		 *
+		 * @return a string composed of columns separated by a specific separator.
+		 */
 		   private String getSeperatedColumns(Set<String> headers, Map<String, String> map, String separator) {
 		        List<String> items = new ArrayList<String>();
 		        for (String header : headers) {
@@ -55,6 +79,14 @@ public class JsonToCsvWriter {
 		        return StringUtils.join(items.toArray(), separator);
 		    }
 		   
+		   /**
+			 * @author rahul.raman Write the given CSV from a flat json to the given file.
+			 * 
+			 * @param flatJson  Flattened JSON Obtained
+			 * @param separator how do you want to separate the values
+			 * @param fileName  fileName of the newly created CSVs
+			 * @param headers
+			 */
 		   public void writeLargeFile(List<LinkedHashMap<String, String>> flatJson, String separator, String fileName, Set<String> headers){
 		    	String csvString;
 		        csvString = StringUtils.join(headers.toArray(), separator) + "\n";
@@ -78,6 +110,13 @@ public class JsonToCsvWriter {
 	String fileContent = "";
 
 	// Main Loop write your logic here
+	/**
+	 * @author rahul.raman Start Flattening JSON Once Flattening is done, call
+	 *         generateCSV method to finally create repective CSVs
+	 *
+	 * @param CXDB Support ticket number, like the naming convention we provide for
+	 *             Key in our Csvs
+	 */
 	public void parseJSON(String CXDBv_01_SUPNumber,String JsonFileName,String parentCSVFileName) {
 
 		System.out.println("Started.");
@@ -94,8 +133,17 @@ public class JsonToCsvWriter {
 		}
 	}
 
-//region parseJSON
-//=====================================================================================
+	/**
+	 * @author rahul.raman
+	 * 
+	 *         Flatten the root node the main Parent JSON
+	 *
+	 * @param fileName   The fileName.csv of csv
+	 * @param jsonObject JSON Object containing the whole Json
+	 * @param CXDB       Support ticket number, like the naming convention we
+	 *                   provide for Key in our Csvs
+	 * @param rowNumber  On which to write in the CSV.
+	 */
 	public void parseRootNode(String CXDBv_01_SUPNumber,String fileName, JSONObject jsonObject, int rowNumber) {
 
 		if (!csvLists.containsKey(fileName)) {
@@ -149,6 +197,18 @@ public class JsonToCsvWriter {
 
 	}
 
+	/**
+	 * @author rahul.raman
+	 * 
+	 *         Parse JSON Object of parent JSON
+	 *
+	 * @param fileName   The fileName.csv of csv
+	 * @param parentname Parent Name of the JSON Object
+	 * @param jsonObject JSON Object containing the whole Json
+	 * @param CXDB       Support ticket number, like the naming convention we
+	 *                   provide for Key in our Csvs
+	 * @param rowNumber  On which to write in the CSV.
+	 */
 	public void parseJsonNode(String CXDBv_01_SUPNumber,String fileName, String parentname, JSONObject jsonObject, int rowNumber) {
 
 		Iterator<String> keys = jsonObject.keys();
@@ -197,7 +257,15 @@ public class JsonToCsvWriter {
 
 	}
 
-//=============================================================================
+	/**
+	 * * @author rahul.raman
+	 * 
+	 * Count the number of Json Array in parent JSON and the JSON arrays present in
+	 * JSON objects
+	 * 
+	 * @param keyNameofArray COntains the Key Name of JSON Arrays present
+	 * @param jsonObject     JSON Object containing the whole Json
+	 */
 	public void countOfJsonArray(String CXDBv_01_SUPNumber,List<String> keyNameofArray, JSONObject jsonObject)
 	{
 		int lengthofArray = keyNameofArray.size();
@@ -211,7 +279,16 @@ public class JsonToCsvWriter {
 			
 		}
 	}
-//=============================================================================	
+	/**
+	 * @author rahul.raman
+	 * 
+	 *         Parse JSON Array of whole JSON
+	 *
+	 * @param fileName   The fileName.csv of csv
+	 * @param parentname Parent Name of the JSON Object
+	 * @param jsonArray  JSON Array containing the whole Json Array
+	 * @param rowNumber  On which to write in the CSV.
+	 */
 	public void parseJsonArray(String CXDBv_01_SUPNumber, String fileName, String parentName,JSONArray jsonArray, int rowNumber) {
 		int length = jsonArray.length();
 		for (int i = 0; i < length; i++) {
@@ -225,6 +302,16 @@ public class JsonToCsvWriter {
 		}
 	}
 	
+	/**
+	 * @author rahul.raman
+	 * 
+	 *         Parse JSON Objects of JSON Array of whole JSON
+	 *
+	 * @param fileName   The fileName.csv of csv
+	 * @param parentname Parent Name of the JSON Object
+	 * @param jsonObject Reading JSON on by one
+	 * @param rowNumber  On which to write in the CSV.
+	 */
 	public void parseJsonObjectofArray(String CXDBv_01_SUPNumber,String fileName,String parentName,JSONObject jsonObject,int rowNumber)
 	{
 		Iterator<String> keys = jsonObject.keys();
@@ -276,10 +363,13 @@ public class JsonToCsvWriter {
 		}
 
 	}
-//=============================================================================
-//endregion
-
-//region generate csv
+	
+	/**
+	 * @author rahul.raman
+	 * 
+	 *         Generate CSV on by one according the .csv key present in csvLists
+	 *
+	 */
 	public void generatecsv() {
 
 		for (int i = 0; i < csvLists.keySet().toArray().length; i++) {
