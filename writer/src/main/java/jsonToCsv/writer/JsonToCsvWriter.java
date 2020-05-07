@@ -1,9 +1,14 @@
 package jsonToCsv.writer;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardOpenOption;
 import java.util.*;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -15,29 +20,72 @@ public class JsonToCsvWriter {
 	// ArrayList aa = new Arraylist
 
 	class Csvs {
-		// public ArrayList<String> headers = new ArrayList<>(); //for control use this
+		public Set<String> headers = new LinkedHashSet<String>();
 		public ArrayList<LinkedHashMap<String, String>> rowData = new ArrayList<LinkedHashMap<String, String>>();
 
-		public void dumprecords() {
-			for (HashMap<String, String> row : rowData) {
+		public void dumprecords(String fileName) {
+			for(int k=0;k<rowData.size();k++)
+			{
+				headers = collectOrderedHeaders(rowData);
+				for (LinkedHashMap<String, String> row : rowData) {
 
-				System.out.println(row);
+					writeLargeFile(rowData, ",", fileName, headers);
+					System.out.println(row);
+				}
+				
 			}
 
 		}
+		
+		public Set<String> collectOrderedHeaders(List<LinkedHashMap<String, String>> flatJson) {
+	        Set<String> headers = new LinkedHashSet<String>();
+	        for (Map<String, String> map : flatJson) {
+	        	headers.addAll(map.keySet());
+	        }
+	        return headers;
+	    }    
+		
+		   private String getSeperatedColumns(Set<String> headers, Map<String, String> map, String separator) {
+		        List<String> items = new ArrayList<String>();
+		        for (String header : headers) {
+		            String value = map.get(header) == null ? "" : map.get(header).replaceAll(",", "||"); 
+		            items.add(value);
+		        }
+
+		        return StringUtils.join(items.toArray(), separator);
+		    }
+		   
+		   public void writeLargeFile(List<LinkedHashMap<String, String>> flatJson, String separator, String fileName, Set<String> headers){
+		    	String csvString;
+		        csvString = StringUtils.join(headers.toArray(), separator) + "\n";
+		        File file = new File(fileName);
+		        
+		        try {
+		            // ISO8859_1 char code to Latin alphabet
+		            FileUtils.write(file, csvString, "ISO8859_1");
+		            
+		            for (Map<String, String> map : flatJson) {
+		            	csvString = "";
+		            	csvString = getSeperatedColumns(headers, map, separator) + "\n";
+		            	Files.write(Paths.get(fileName), csvString.getBytes("ISO8859_1"), StandardOpenOption.APPEND);
+		            }            
+		        } catch (IOException e) {
+		            //LOGGER.error("CSVWriter#writeLargeFile(flatJson, separator, fileName, headers) IOException: ", e);
+		        }
+		    }    
 	}
 
 	String fileContent = "";
 
 	// Main Loop write your logic here
-	public void parseJSON(String CXDBv_01_SUPNumber) {
+	public void parseJSON(String CXDBv_01_SUPNumber,String JsonFileName,String parentCSVFileName) {
 
 		System.out.println("Started.");
 		try {
 			// read the JSON Files
-			fileContent = FileUtils.readFileToString(new File("files/ElizaAdams.json"));
+			fileContent = FileUtils.readFileToString(new File("files/"+JsonFileName+".json"));
 			JSONObject mainJson = new JSONObject(fileContent);
-			parseRootNode(CXDBv_01_SUPNumber,"PersonADD.csv", mainJson, 0);
+			parseRootNode(CXDBv_01_SUPNumber,parentCSVFileName+".csv", mainJson, 0);
 			countOfJsonArray(CXDBv_01_SUPNumber,keyNameofArray,mainJson);
 			generatecsv();
 	
@@ -235,9 +283,9 @@ public class JsonToCsvWriter {
 	public void generatecsv() {
 
 		for (int i = 0; i < csvLists.keySet().toArray().length; i++) {
-	//		csvLists.get
+			String fileName = (String) csvLists.keySet().toArray()[i];
 			Csvs tmpcsv = csvLists.get(csvLists.keySet().toArray()[i]);
-			tmpcsv.dumprecords();
+			tmpcsv.dumprecords(fileName);
 		}
 
 	}
@@ -246,7 +294,7 @@ public class JsonToCsvWriter {
 	public static void main(String[] args) throws Exception {
 
 		JsonToCsvWriter obj = new JsonToCsvWriter();
-		obj.parseJSON("CXDBv75_01_SUP-61591");
+		obj.parseJSON("CXDBv75_01_SUP-61591","ElizaAdams","PersonADD");
 	}
 
 }
